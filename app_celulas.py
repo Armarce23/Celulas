@@ -12,7 +12,7 @@ creds = Credentials.from_service_account_info(creds_dict)
 client = gspread.authorize(creds)
 
 # 👉 Usa esto para evitar errores por nombre
-sheet = client.open_by_url("PEGA_AQUI_EL_LINK_DE_TU_SHEET").sheet1
+sheet = client.open_by_url("https://docs.google.com/spreadsheets/d/1YKaieMah74PhHw8-eSv7-KCnahdBOdc4pTH0AjwPdVA/edit?usp=sharing").sheet1
 
 # --- UI ---
 st.title("🔥 Registro de Jóvenes")
