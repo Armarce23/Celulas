@@ -11,7 +11,7 @@ st.markdown("""
 
 /* Botón principal */
 .stButton > button {
-    background-color: #7c3aed !important;  /* morado */
+    background-color: #8205f0 !important;  /* morado */
     color: white !important;
     border-radius: 10px;
     padding: 10px 20px;
@@ -28,7 +28,7 @@ st.markdown("""
 
 /* Click */
 .stButton > button:active {
-    background-color: #4c1d95 !important;
+    background-color: #8205f0 !important;
 }
 
 </style>
