@@ -42,7 +42,44 @@ with st.form("formulario"):
         ["Presencial", "Virtual", "Ambas"]
     )
 
-    barrio = st.text_input('Barrio (o escribe "VIRTUAL")')
+    barrios_bello = [
+    "Niquía",
+    "Bello Centro",
+    "Pérez",
+    "Madera",
+    "Santa Ana",
+    "Trapiche",
+    "Cabañas",
+    "Cabañitas",
+    "Zamora",
+    "Buenos Aires",
+    "Rincón Santo",
+    "Salento",
+    "Paris",
+    "La Cumbre",
+    "Gran Avenida",
+    "Andalucía",
+    "Primavera",
+    "El Carmelo",
+    "La Gabriela",
+    "La Selva",
+    "Ciudad Niquía",
+    "Altos de Niquía",
+    "La Aldea",
+    "Santa Rita",
+    "Los Alpes",
+    "Manchester",
+    "El Rosario",
+    "La Maruchenga",
+    "Playa Rica",
+    "Valadares"
+]
+
+if modalidad == "Virtual":
+    barrio = "VIRTUAL"
+    st.text("Barrio: VIRTUAL")
+else:
+    barrio = st.selectbox("Selecciona el barrio en Bello", barrios_bello)
 
     # Lista de líderes
     lideres = [
