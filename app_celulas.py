@@ -10,10 +10,14 @@ st.set_page_config(page_title="Registro de Jóvenes", page_icon="🔥")
 scope = ["https://spreadsheets.google.com/feeds",
          "https://www.googleapis.com/auth/drive"]
 
-creds = ServiceAccountCredentials.from_json_keyfile_name(
-    r"C:\Users\Arley Martinez\Desktop\Programar\Registro de Jovenes\credenciales.json",
-    scope
-)
+from google.oauth2.service_account import Credentials
+import gspread
+
+creds_dict = st.secrets["gcp_service_account"]
+
+creds = Credentials.from_service_account_info(creds_dict)
+
+client = gspread.authorize(creds)
 client = gspread.authorize(creds)
 
 sheet = client.open("Registro Jóvenes").sheet1
