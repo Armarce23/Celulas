@@ -18,7 +18,6 @@ creds_dict = st.secrets["gcp_service_account"]
 creds = Credentials.from_service_account_info(creds_dict)
 
 client = gspread.authorize(creds)
-client = gspread.authorize(creds)
 
 sheet = client.open("Registro Jóvenes").sheet1
 
