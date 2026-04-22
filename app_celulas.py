@@ -181,4 +181,4 @@ if enviar:
             fecha
         ])
 
-        st.success("✅ Registro guardado correctamente en la nube")
+        st.success("✅ Jóven Registrado")
