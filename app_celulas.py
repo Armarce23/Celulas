@@ -28,7 +28,7 @@ h1 {
 
 /* Card */
 .card {
-    background-color: #1c1f26;
+    background-color: #d6fad4;
     padding: 20px;
     border-radius: 15px;
     box-shadow: 0px 4px 12px rgba(0,0,0,0.4);
