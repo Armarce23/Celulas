@@ -14,10 +14,10 @@ st.set_page_config(
 
 st.markdown("""
 <style>
-/* Fondo general */
+
+/* Fondo general (seguro) */
 .stApp {
     background-color: #0e1117;
-    color: white;
 }
 
 /* Título */
