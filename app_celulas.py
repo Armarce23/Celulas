@@ -17,7 +17,7 @@ st.markdown("""
 
 /* Fondo general (seguro) */
 .stApp {
-    background-color: #0e1117;
+    background-color: ##1a102b;
 }
 
 /* Título */
