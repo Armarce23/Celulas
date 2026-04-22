@@ -6,8 +6,9 @@ from datetime import datetime
 # --- CONFIG ---
 st.set_page_config(page_title="Registro de Jóvenes", page_icon="🔥")
 
-# --- CONEXIÓN GOOGLE SHEETS (USANDO SECRETS) ---
+# --- CONEXIÓN GOOGLE SHEETS ---
 creds_dict = st.secrets["gcp_service_account"]
+
 creds = Credentials.from_service_account_info(
     creds_dict,
     scopes=[
@@ -15,16 +16,42 @@ creds = Credentials.from_service_account_info(
         "https://www.googleapis.com/auth/drive"
     ]
 )
+
 client = gspread.authorize(creds)
 
-# 👉 Usa esto para evitar errores por nombre
-sheet = client.open_by_url("https://docs.google.com/spreadsheets/d/1YKaieMah74PhHw8-eSv7-KCnahdBOdc4pTH0AjwPdVA/edit?usp=sharing").sheet1
+sheet = client.open_by_url(
+    "https://docs.google.com/spreadsheets/d/1YKaieMah74PhHw8-eSv7-KCnahdBOdc4pTH0AjwPdVA/edit?usp=sharing"
+).sheet1
+
 
 # --- UI ---
 st.title("🔥 Registro de Jóvenes")
 st.markdown("Completa tu información 💛")
 
-# --- FORM ---
+# =========================
+# 📍 LISTAS
+# =========================
+barrios_bello = [
+    "Niquía", "Bello Centro", "Pérez", "Madera", "Santa Ana",
+    "Trapiche", "Cabañas", "Cabañitas", "Zamora", "Buenos Aires",
+    "Rincón Santo", "Salento", "Paris", "La Cumbre", "Gran Avenida",
+    "Andalucía", "Primavera", "El Carmelo", "La Gabriela",
+    "La Selva", "Ciudad Niquía", "Altos de Niquía", "La Aldea",
+    "Santa Rita", "Los Alpes", "Manchester", "El Rosario",
+    "La Maruchenga", "Playa Rica", "Valadares"
+]
+
+lideres = [
+    "Juan Loaiza",
+    "Ruth Gómez",
+    "Jhonny Rodriguez",
+    "Mary Zuleta"
+]
+
+
+# =========================
+# 🧾 FORMULARIO (CORREGIDO)
+# =========================
 with st.form("formulario"):
 
     nombre = st.text_input("Nombre completo *")
@@ -42,53 +69,17 @@ with st.form("formulario"):
         ["Presencial", "Virtual", "Ambas"]
     )
 
-    barrios_bello = [
-    "Niquía",
-    "Bello Centro",
-    "Pérez",
-    "Madera",
-    "Santa Ana",
-    "Trapiche",
-    "Cabañas",
-    "Cabañitas",
-    "Zamora",
-    "Buenos Aires",
-    "Rincón Santo",
-    "Salento",
-    "Paris",
-    "La Cumbre",
-    "Gran Avenida",
-    "Andalucía",
-    "Primavera",
-    "El Carmelo",
-    "La Gabriela",
-    "La Selva",
-    "Ciudad Niquía",
-    "Altos de Niquía",
-    "La Aldea",
-    "Santa Rita",
-    "Los Alpes",
-    "Manchester",
-    "El Rosario",
-    "La Maruchenga",
-    "Playa Rica",
-    "Valadares"
-]
+    # --- Barrio condicional ---
+    if modalidad == "Virtual":
+        barrio = "VIRTUAL"
+        st.info("Barrio: VIRTUAL")
+    else:
+        barrio = st.selectbox(
+            "Selecciona el barrio en Bello",
+            barrios_bello
+        )
 
-if modalidad == "Virtual":
-    barrio = "VIRTUAL"
-    st.text("Barrio: VIRTUAL")
-else:
-    barrio = st.selectbox("Selecciona el barrio en Bello", barrios_bello)
-
-    # Lista de líderes
-    lideres = [
-        "Juan Loaiza",
-        "Ruth Gómez",
-        "Jhonny Rodriguez",
-        "Mary Zuleta"
-    ]
-
+    # --- líder y grupo ---
     lider = st.selectbox("Selecciona tu líder de 12", lideres)
 
     grupo = st.radio(
@@ -96,9 +87,13 @@ else:
         ["Hombres", "Damas"]
     )
 
-    enviar = st.form_submit_button("Guardar")
+    # 🔥 BOTÓN OBLIGATORIO DEL FORM
+    enviar = st.form_submit_button("Guardar registro")
 
-# --- GUARDAR EN GOOGLE SHEETS ---
+
+# =========================
+# 💾 GUARDAR EN SHEETS
+# =========================
 if enviar:
     if nombre.strip() == "" or celular.strip() == "":
         st.warning("⚠️ Completa los campos obligatorios")
@@ -106,8 +101,15 @@ if enviar:
         fecha = datetime.now().strftime("%Y-%m-%d %H:%M")
 
         sheet.append_row([
-            nombre, celular, dia, horario,
-            modalidad, barrio, lider, grupo, fecha
+            nombre,
+            celular,
+            dia,
+            horario,
+            modalidad,
+            barrio,
+            lider,
+            grupo,
+            fecha
         ])
 
         st.success("✅ Registro guardado en la nube")
