@@ -1,25 +1,18 @@
 import streamlit as st
 import gspread
-from oauth2client.service_account import ServiceAccountCredentials
+from google.oauth2.service_account import Credentials
 from datetime import datetime
 
 # --- CONFIG ---
 st.set_page_config(page_title="Registro de Jóvenes", page_icon="🔥")
 
-# --- CONEXIÓN GOOGLE SHEETS ---
-scope = ["https://spreadsheets.google.com/feeds",
-         "https://www.googleapis.com/auth/drive"]
-
-from google.oauth2.service_account import Credentials
-import gspread
-
+# --- CONEXIÓN GOOGLE SHEETS (USANDO SECRETS) ---
 creds_dict = st.secrets["gcp_service_account"]
-
 creds = Credentials.from_service_account_info(creds_dict)
-
 client = gspread.authorize(creds)
 
-sheet = client.open("Registro Jóvenes").sheet1
+# 👉 Usa esto para evitar errores por nombre
+sheet = client.open_by_url("PEGA_AQUI_EL_LINK_DE_TU_SHEET").sheet1
 
 # --- UI ---
 st.title("🔥 Registro de Jóvenes")
@@ -31,28 +24,32 @@ with st.form("formulario"):
     nombre = st.text_input("Nombre completo *")
     celular = st.text_input("Número de celular *")
 
-    dia = st.selectbox("Día de tu célula",
+    dia = st.selectbox(
+        "Día de tu célula",
         ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo"]
     )
 
     horario = st.text_input("Horario")
 
-    modalidad = st.radio("Modalidad",
+    modalidad = st.radio(
+        "Modalidad",
         ["Presencial", "Virtual", "Ambas"]
     )
 
     barrio = st.text_input('Barrio (o escribe "VIRTUAL")')
 
+    # Lista de líderes
     lideres = [
-    "Juan Loaiza",
-    "Ruth Gómez",
-    "Jhonny Rodriguez",
-    "Mary Zuleta"
-]
+        "Juan Loaiza",
+        "Ruth Gómez",
+        "Jhonny Rodriguez",
+        "Mary Zuleta"
+    ]
 
     lider = st.selectbox("Selecciona tu líder de 12", lideres)
 
-    grupo = st.radio("Equipo",
+    grupo = st.radio(
+        "Equipo",
         ["Hombres", "Damas"]
     )
 
