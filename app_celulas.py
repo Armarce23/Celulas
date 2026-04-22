@@ -6,6 +6,33 @@ from datetime import datetime
 # =========================
 # 🎨 CONFIG VISUAL
 # =========================
+st.markdown("""
+<style>
+
+/* Botón principal */
+.stButton > button {
+    background-color: #7c3aed !important;  /* morado */
+    color: white !important;
+    border-radius: 10px;
+    padding: 10px 20px;
+    font-weight: bold;
+    border: none;
+    transition: 0.3s;
+}
+
+/* Hover (cuando pasa el mouse) */
+.stButton > button:hover {
+    background-color: #5b21b6 !important;
+    transform: scale(1.02);
+}
+
+/* Click */
+.stButton > button:active {
+    background-color: #4c1d95 !important;
+}
+
+</style>
+""", unsafe_allow_html=True)
 st.set_page_config(
     page_title="Registro de Jóvenes",
     page_icon="🔥",
