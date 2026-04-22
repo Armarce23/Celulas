@@ -22,7 +22,7 @@ st.markdown("""
 
 /* Hover (cuando pasa el mouse) */
 .stButton > button:hover {
-    background-color: #8205f0 !important;
+    background-color: #684a82 !important;
     transform: scale(1.02);
 }
 
