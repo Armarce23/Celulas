@@ -23,12 +23,12 @@ st.markdown("""
 /* Título */
 h1 {
     text-align: center;
-    color: #ff4b4b;
+    color: #f2faf4;
 }
 
 /* Card */
 .card {
-    background-color: #d6fad4;
+    background-color: #f2faf4;
     padding: 20px;
     border-radius: 15px;
     box-shadow: 0px 4px 12px rgba(0,0,0,0.4);
