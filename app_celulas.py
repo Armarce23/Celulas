@@ -3,10 +3,50 @@ import gspread
 from google.oauth2.service_account import Credentials
 from datetime import datetime
 
-# --- CONFIG ---
-st.set_page_config(page_title="Registro de Jóvenes", page_icon="🔥")
+# =========================
+# 🎨 CONFIG VISUAL
+# =========================
+st.set_page_config(
+    page_title="Registro de Jóvenes",
+    page_icon="🔥",
+    layout="centered"
+)
 
-# --- CONEXIÓN GOOGLE SHEETS ---
+st.markdown("""
+<style>
+/* Fondo general */
+.stApp {
+    background-color: #0e1117;
+    color: white;
+}
+
+/* Título */
+h1 {
+    text-align: center;
+    color: #ff4b4b;
+}
+
+/* Card */
+.card {
+    background-color: #1c1f26;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0px 4px 12px rgba(0,0,0,0.4);
+}
+</style>
+""", unsafe_allow_html=True)
+
+
+# =========================
+# 🔥 TÍTULO
+# =========================
+st.markdown("<h1>Registro de Jóvenes</h1>", unsafe_allow_html=True)
+st.markdown("<p style='text-align:center; color:#cccccc;'>Completa tu información 💛</p>", unsafe_allow_html=True)
+
+
+# =========================
+# 📊 GOOGLE SHEETS
+# =========================
 creds_dict = st.secrets["gcp_service_account"]
 
 creds = Credentials.from_service_account_info(
@@ -24,12 +64,8 @@ sheet = client.open_by_url(
 ).sheet1
 
 
-# --- UI ---
-st.title("🔥 Registro de Jóvenes")
-st.markdown("Completa tu información 💛")
-
 # =========================
-# 📍 LISTAS
+# 📍 DATOS
 # =========================
 barrios_bello = [
     "Niquía", "Bello Centro", "Pérez", "Madera", "Santa Ana",
@@ -50,12 +86,19 @@ lideres = [
 
 
 # =========================
-# 🧾 FORMULARIO (CORREGIDO)
+# 🧾 FORMULARIO
 # =========================
+st.markdown('<div class="card">', unsafe_allow_html=True)
+
 with st.form("formulario"):
 
-    nombre = st.text_input("Nombre completo *")
-    celular = st.text_input("Número de celular *")
+    col1, col2 = st.columns(2)
+
+    with col1:
+        nombre = st.text_input("Nombre completo *")
+
+    with col2:
+        celular = st.text_input("Número de celular *")
 
     dia = st.selectbox(
         "Día de tu célula",
@@ -69,30 +112,29 @@ with st.form("formulario"):
         ["Presencial", "Virtual", "Ambas"]
     )
 
-    # --- Barrio condicional ---
+    # =========================
+    # 📍 BARRIO
+    # =========================
     if modalidad == "Virtual":
         barrio = "VIRTUAL"
-        st.info("Barrio: VIRTUAL")
+        st.info("📡 Modalidad virtual activada")
     else:
-        barrio = st.selectbox(
-            "Selecciona el barrio en Bello",
-            barrios_bello
-        )
+        barrio = st.selectbox("Selecciona el barrio en Bello", barrios_bello)
 
-    # --- líder y grupo ---
     lider = st.selectbox("Selecciona tu líder de 12", lideres)
 
-    grupo = st.radio(
-        "Equipo",
-        ["Hombres", "Damas"]
-    )
+    grupo = st.radio("Equipo", ["Hombres", "Damas"])
 
-    # 🔥 BOTÓN OBLIGATORIO DEL FORM
-    enviar = st.form_submit_button("Guardar registro")
+    # =========================
+    # 🔘 BOTÓN
+    # =========================
+    enviar = st.form_submit_button("💾 Guardar registro", use_container_width=True)
+
+st.markdown('</div>', unsafe_allow_html=True)
 
 
 # =========================
-# 💾 GUARDAR EN SHEETS
+# 💾 GUARDAR DATOS
 # =========================
 if enviar:
     if nombre.strip() == "" or celular.strip() == "":
@@ -112,4 +154,4 @@ if enviar:
             fecha
         ])
 
-        st.success("✅ Registro guardado en la nube")
+        st.success("✅ Registro guardado correctamente en la nube")
