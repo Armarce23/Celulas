@@ -41,7 +41,7 @@ h1 {
 # 🔥 TÍTULO
 # =========================
 st.markdown("<h1>Registro de Jóvenes</h1>", unsafe_allow_html=True)
-st.markdown("<p style='text-align:center; color:#cccccc;'>Completa tu información 💛</p>", unsafe_allow_html=True)
+st.markdown("<p style='text-align:center; color:#f2faf4;'>Completa tu información 💛</p>", unsafe_allow_html=True)
 
 
 # =========================
