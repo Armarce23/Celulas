@@ -88,16 +88,18 @@ sheet = client.open_by_url("https://docs.google.com/spreadsheets/d/1YKaieMah74Ph
 # =========================
 # 📍 DATOS Y FORMULARIO
 # =========================
-barrios_bello = ["Niquía", "Bello Centro", "Pérez", "Madera", "Santa Ana", "Trapiche", "Cabañas", "Cabañitas", "Zamora", "Buenos Aires", "Rincón Santo", "Salento", "Paris", "La Cumbre", "Gran Avenida", "Andalucía", "Primavera", "El Carmelo", "La Gabriela", "La Selva", "Ciudad Niquía", "Altos de Niquía", "La Aldea", "Santa Rita", "Los Alpes", "Manchester", "El Rosario", "La Maruchenga", "Playa Rica", "Valadares"]
+barrios_bello = ["Niquía", "Central", "Pérez", "Quitasol", "Madera", "Santa Ana", "Trapiche", "Cabañas", "Cabañitas", "Serramonte", "Zamora", "Buenos Aires", "Espiritu Santo", "Salento", "Paris", "La Cumbre", "Gran Avenida", "Andalucía", "Primavera", "El Carmelo", "La Gabriela", "La Selva", "Ciudad Niquía", "Altos de Niquía", "La Aldea", "Santa Rita", "Los Alpes", "Manchester", "El Rosario", "La Maruchenga", "Playa Rica", "Valadares"]
 lideres = ["Juan Loaiza", "Ruth Gómez", "Jhonny Rodriguez", "Mary Zuleta"]
 
 st.markdown('<div class="card">', unsafe_allow_html=True)
 with st.form("formulario"):
-    col1, col2 = st.columns(2)
+    col1, col2, col3 = st.columns(3)
     with col1:
         nombre = st.text_input("Nombre completo *")
     with col2:
         celular = st.text_input("Número de celular *")
+    with col3:
+        edad = st.text_input("Edad *")
 
     dia = st.selectbox("Día de tu célula", ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo"])
     horario = st.text_input("Horario")
