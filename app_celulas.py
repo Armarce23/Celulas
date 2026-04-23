@@ -86,7 +86,7 @@ st.set_page_config(
 # 🔥 HEADER
 # =========================
 st.markdown("<h1>Registro de Jóvenes</h1>", unsafe_allow_html=True)
-st.markdown("<p class='subtitle'>¡Completa tu información, juntos veremos la promesa en NUESTRA IGLESIA! 🔥</p>", unsafe_allow_html=True)
+st.markdown("<p class='subtitle'>¡Completa tu información, juntos veremos la promesa en <h1>NUESTRA IGLESIA</h1>! 🔥</p>", unsafe_allow_html=True)
 
 # =========================
 # 📊 GOOGLE SHEETS
@@ -141,5 +141,5 @@ if enviar:
         st.warning("⚠️ Completa los campos obligatorios")
     else:
         fecha = datetime.now().strftime("%Y-%m-%d %H:%M")
-        sheet.append_row([nombre, celular, dia, horario, modalidad, barrio, lider, grupo, fecha])
+        sheet.append_row([nombre, celular, edad, dia, horario, modalidad, barrio, lider, grupo, fecha])
         st.success("✅ ¡Joven registrado con éxito!")
