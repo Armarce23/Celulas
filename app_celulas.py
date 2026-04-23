@@ -29,19 +29,6 @@ st.markdown("""
         margin-bottom: 20px;
     }
 
-    /* Contenedor estilo Card */
-    .st.markdown("""
-<style>
-    /* Estilo del contenedor blanco principal */
-    .card {
-        background-color: #FFFFFF;
-        padding: 30px;
-        border-radius: 20px;
-        border: 2px solid #00C853; /* Verde vibrante */
-        box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.1);
-        margin-bottom: 20px;
-    }
-
     /* Estilo del banner negro interno */
     .banner-move {
         background-color: #121212; 
