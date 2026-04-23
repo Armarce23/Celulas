@@ -61,7 +61,6 @@ st.markdown("""
     }
 </style>
 """, unsafe_allow_html=True)
-
 st.set_page_config(
     page_title="Registro de Jóvenes",
     page_icon="🔥",
@@ -72,7 +71,7 @@ st.set_page_config(
 # 🔥 HEADER
 # =========================
 st.markdown("<h1>Registro de Jóvenes</h1>", unsafe_allow_html=True)
-st.markdown("<p class='subtitle'>¡Completa tu información y únete! 🚀</p>", unsafe_allow_html=True)
+st.markdown("<p class='subtitle'>¡Completa tu información, juntos veremos la promesa en nuestro ministerio! 🚀</p>", unsafe_allow_html=True)
 
 # =========================
 # 📊 GOOGLE SHEETS
@@ -111,7 +110,7 @@ with st.form("formulario"):
         barrio = st.selectbox("Selecciona el barrio en Bello", barrios_bello)
 
     lider = st.selectbox("Selecciona tu líder de 12", lideres)
-    grupo = st.radio("Equipo", ["Hombres", "Damas"], horizontal=True)
+    grupo = st.radio("Célula", ["Caballeros", "Damas", "Mixta"], horizontal=True)
 
     enviar = st.form_submit_button("💾 Guardar registro", use_container_width=True)
 
