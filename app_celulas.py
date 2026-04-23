@@ -86,7 +86,7 @@ st.set_page_config(
 # 🔥 HEADER
 # =========================
 st.markdown("<h1>Registro de Jóvenes</h1>", unsafe_allow_html=True)
-st.markdown("<p class='subtitle'>¡Completa tu información, juntos veremos la promesa en nuestro ministerio! 🔥</p>", unsafe_allow_html=True)
+st.markdown("<p class='subtitle'>¡Completa tu información, juntos veremos la promesa en NUESTRA IGLESIA! 🔥</p>", unsafe_allow_html=True)
 
 # =========================
 # 📊 GOOGLE SHEETS
