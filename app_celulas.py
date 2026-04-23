@@ -117,7 +117,7 @@ with st.form("formulario"):
         edad = st.text_input("Edad *")
 
     dia = st.selectbox("Día de tu célula", ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo"])
-    horario = st.text_input("Horario")
+    horario = st.text_input("Hora <b>Ejemplo: 7:30"</b>)
     modalidad = st.radio("Modalidad", ["Presencial", "Virtual", "Ambas"])
 
     if modalidad == "Virtual":
