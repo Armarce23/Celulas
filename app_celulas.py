@@ -1,5 +1,6 @@
 import streamlit as st
 import gspread
+import pytz
 from google.oauth2.service_account import Credentials
 from datetime import datetime
 
@@ -140,6 +141,23 @@ if enviar:
     if nombre.strip() == "" or celular.strip() == "":
         st.warning("⚠️ Completa los campos obligatorios")
     else:
-        fecha = datetime.now().strftime("%Y-%m-%d %H:%M")
-        sheet.append_row([nombre, celular, edad, dia, horario, modalidad, barrio, lider, grupo, fecha])
+        # 1. Definimos la zona horaria de Bogotá/Colombia
+        zona_horaria = pytz.timezone('America/Bogota')
+        
+        # 2. Obtenemos la hora actual en esa zona específica
+        fecha = datetime.now(zona_horaria).strftime("%Y-%m-%d %H:%M")
+
+        # 3. Guardamos en la hoja
+        sheet.append_row([
+            nombre,
+            celular,
+            dia,
+            horario,
+            modalidad,
+            barrio,
+            lider,
+            grupo,
+            fecha
+        ])
+
         st.success("✅ ¡Joven registrado con éxito!")
