@@ -4,144 +4,106 @@ from google.oauth2.service_account import Credentials
 from datetime import datetime
 
 # =========================
-# 🎨 CONFIG VISUAL
+# 🎨 CONFIGURACIÓN VISUAL
 # =========================
+# Paleta: Verde (#00C853), Morado (#6200EA), Blanco (#FFFFFF), Negro (#121212)
 st.markdown("""
 <style>
+    /* Fondo de toda la aplicación */
+    .stApp {
+        background-color: #E8F5E9; 
+    }
 
-/* Botón principal */
-.stButton > button {
-    background-color: #8205f0 !important;  /* morado */
-    color: white !important;
-    border-radius: 10px;
-    padding: 10px 20px;
-    font-weight: bold;
-    border: none;
-    transition: 0.3s;
-}
+    /* Título principal */
+    h1 {
+        text-align: center;
+        color: #6200EA;
+        font-weight: 800;
+    }
 
-/* Hover (cuando pasa el mouse) */
-.stButton > button:hover {
-    background-color: #684a82 !important;
-    transform: scale(1.02);
-}
+    /* Subtítulo */
+    .subtitle {
+        text-align: center;
+        color: #121212;
+        font-size: 1.2rem;
+        margin-bottom: 20px;
+    }
 
-/* Click */
-.stButton > button:active {
-    background-color: #8205f0 !important;
-}
+    /* Contenedor estilo Card */
+    .card {
+        background-color: #FFFFFF;
+        padding: 30px;
+        border-radius: 20px;
+        border: 2px solid #00C853;
+        box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.1);
+    }
 
+    /* Botón principal */
+    .stButton > button {
+        background-color: #6200EA !important; 
+        color: white !important;
+        border-radius: 10px !important;
+        padding: 10px 20px !important;
+        font-weight: bold !important;
+        border: none !important;
+        transition: 0.3s !important;
+    }
+
+    .stButton > button:hover {
+        background-color: #3700B3 !important;
+        transform: scale(1.02);
+    }
+    
+    /* Etiquetas de inputs */
+    label {
+        color: #121212 !important;
+        font-weight: 600 !important;
+    }
 </style>
 """, unsafe_allow_html=True)
+
 st.set_page_config(
     page_title="Registro de Jóvenes",
     page_icon="🔥",
     layout="centered"
 )
 
-st.markdown("""
-<style>
-
-/* Fondo general (seguro) */
-.stApp {
-    background-color: #2af7bd;
-}
-
-/* Título */
-h1 {
-    text-align: center;
-    color: #f2faf4;
-}
-
-/* Card */
-.card {
-    background-color: #f2faf4;
-    padding: 20px;
-    border-radius: 15px;
-    box-shadow: 0px 4px 12px rgba(0,0,0,0.4);
-}
-</style>
-""", unsafe_allow_html=True)
-
-
 # =========================
-# 🔥 TÍTULO
+# 🔥 HEADER
 # =========================
 st.markdown("<h1>Registro de Jóvenes</h1>", unsafe_allow_html=True)
-st.markdown("<p style='text-align:center; color:#f2faf4;'>Completa tu información 💛</p>", unsafe_allow_html=True)
-
+st.markdown("<p class='subtitle'>¡Completa tu información y únete! 🚀</p>", unsafe_allow_html=True)
 
 # =========================
 # 📊 GOOGLE SHEETS
 # =========================
+# (Mantén tu lógica de credenciales aquí)
 creds_dict = st.secrets["gcp_service_account"]
-
 creds = Credentials.from_service_account_info(
     creds_dict,
-    scopes=[
-        "https://www.googleapis.com/auth/spreadsheets",
-        "https://www.googleapis.com/auth/drive"
-    ]
+    scopes=["https://www.googleapis.com/auth/spreadsheets", "https://www.googleapis.com/auth/drive"]
 )
-
 client = gspread.authorize(creds)
-
-sheet = client.open_by_url(
-    "https://docs.google.com/spreadsheets/d/1YKaieMah74PhHw8-eSv7-KCnahdBOdc4pTH0AjwPdVA/edit?usp=sharing"
-).sheet1
-
+sheet = client.open_by_url("https://docs.google.com/spreadsheets/d/1YKaieMah74PhHw8-eSv7-KCnahdBOdc4pTH0AjwPdVA/edit?usp=sharing").sheet1
 
 # =========================
-# 📍 DATOS
+# 📍 DATOS Y FORMULARIO
 # =========================
-barrios_bello = [
-    "Niquía", "Bello Centro", "Pérez", "Madera", "Santa Ana",
-    "Trapiche", "Cabañas", "Cabañitas", "Zamora", "Buenos Aires",
-    "Rincón Santo", "Salento", "Paris", "La Cumbre", "Gran Avenida",
-    "Andalucía", "Primavera", "El Carmelo", "La Gabriela",
-    "La Selva", "Ciudad Niquía", "Altos de Niquía", "La Aldea",
-    "Santa Rita", "Los Alpes", "Manchester", "El Rosario",
-    "La Maruchenga", "Playa Rica", "Valadares"
-]
+barrios_bello = ["Niquía", "Bello Centro", "Pérez", "Madera", "Santa Ana", "Trapiche", "Cabañas", "Cabañitas", "Zamora", "Buenos Aires", "Rincón Santo", "Salento", "Paris", "La Cumbre", "Gran Avenida", "Andalucía", "Primavera", "El Carmelo", "La Gabriela", "La Selva", "Ciudad Niquía", "Altos de Niquía", "La Aldea", "Santa Rita", "Los Alpes", "Manchester", "El Rosario", "La Maruchenga", "Playa Rica", "Valadares"]
+lideres = ["Juan Loaiza", "Ruth Gómez", "Jhonny Rodriguez", "Mary Zuleta"]
 
-lideres = [
-    "Juan Loaiza",
-    "Ruth Gómez",
-    "Jhonny Rodriguez",
-    "Mary Zuleta"
-]
-
-
-# =========================
-# 🧾 FORMULARIO
-# =========================
 st.markdown('<div class="card">', unsafe_allow_html=True)
-
 with st.form("formulario"):
-
     col1, col2 = st.columns(2)
-
     with col1:
         nombre = st.text_input("Nombre completo *")
-
     with col2:
         celular = st.text_input("Número de celular *")
 
-    dia = st.selectbox(
-        "Día de tu célula",
-        ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo"]
-    )
-
+    dia = st.selectbox("Día de tu célula", ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo"])
     horario = st.text_input("Horario")
+    modalidad = st.radio("Modalidad", ["Presencial", "Virtual", "Ambas"])
 
-    modalidad = st.radio(
-        "Modalidad",
-        ["Presencial", "Virtual", "Ambas"]
-    )
-
-    # =========================
-    # 📍 BARRIO
-    # =========================
     if modalidad == "Virtual":
         barrio = "VIRTUAL"
         st.info("📡 Modalidad virtual activada")
@@ -149,36 +111,19 @@ with st.form("formulario"):
         barrio = st.selectbox("Selecciona el barrio en Bello", barrios_bello)
 
     lider = st.selectbox("Selecciona tu líder de 12", lideres)
+    grupo = st.radio("Equipo", ["Hombres", "Damas"], horizontal=True)
 
-    grupo = st.radio("Equipo", ["Hombres", "Damas"])
-
-    # =========================
-    # 🔘 BOTÓN
-    # =========================
     enviar = st.form_submit_button("💾 Guardar registro", use_container_width=True)
 
 st.markdown('</div>', unsafe_allow_html=True)
 
-
 # =========================
-# 💾 GUARDAR DATOS
+# 💾 LÓGICA DE GUARDADO
 # =========================
 if enviar:
     if nombre.strip() == "" or celular.strip() == "":
         st.warning("⚠️ Completa los campos obligatorios")
     else:
         fecha = datetime.now().strftime("%Y-%m-%d %H:%M")
-
-        sheet.append_row([
-            nombre,
-            celular,
-            dia,
-            horario,
-            modalidad,
-            barrio,
-            lider,
-            grupo,
-            fecha
-        ])
-
-        st.success("✅ Jóven Registrado")
+        sheet.append_row([nombre, celular, dia, horario, modalidad, barrio, lider, grupo, fecha])
+        st.success("✅ ¡Joven registrado con éxito!")
