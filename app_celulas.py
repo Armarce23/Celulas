@@ -30,12 +30,40 @@ st.markdown("""
     }
 
     /* Contenedor estilo Card */
+    .st.markdown("""
+<style>
+    /* Estilo del contenedor blanco principal */
     .card {
         background-color: #FFFFFF;
         padding: 30px;
         border-radius: 20px;
-        border: 2px solid #00C853;
+        border: 2px solid #00C853; /* Verde vibrante */
         box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.1);
+        margin-bottom: 20px;
+    }
+
+    /* Estilo del banner negro interno */
+    .banner-move {
+        background-color: #121212; 
+        border-radius: 12px; 
+        padding: 15px; 
+        margin-bottom: 25px;
+        border-left: 5px solid #6200EA; /* Detalle morado lateral */
+    }
+
+    .banner-text {
+        color: #00C853; 
+        text-align: center; 
+        margin: 0; 
+        font-family: 'Arial Black', sans-serif; 
+        letter-spacing: 3px;
+        font-size: 1.4rem;
+    }
+
+    /* Ajuste de color para los textos de los campos */
+    label {
+        color: #121212 !important;
+        font-weight: bold !important;
     }
 
     /* Botón principal */
@@ -71,7 +99,7 @@ st.set_page_config(
 # 🔥 HEADER
 # =========================
 st.markdown("<h1>Registro de Jóvenes</h1>", unsafe_allow_html=True)
-st.markdown("<p class='subtitle'>¡Completa tu información, juntos veremos la promesa en nuestro ministerio! 🚀</p>", unsafe_allow_html=True)
+st.markdown("<p class='subtitle'>¡Completa tu información, juntos veremos la promesa en nuestro ministerio! 🔥</p>", unsafe_allow_html=True)
 
 # =========================
 # 📊 GOOGLE SHEETS
