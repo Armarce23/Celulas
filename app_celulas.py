@@ -223,10 +223,6 @@ with st.form("formulario"):
 
 st.markdown('</div>', unsafe_allow_html=True)
 
-    enviar = st.form_submit_button("💾 Guardar registro", use_container_width=True)
-
-st.markdown('</div>', unsafe_allow_html=True)
-
 # =========================
 # 💾 GUARDAR
 # =========================
