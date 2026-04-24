@@ -1,97 +1,3 @@
-import streamlit as st
-import gspread
-import pytz
-from google.oauth2.service_account import Credentials
-from datetime import datetime
-
-# =========================
-# 🎨 CONFIGURACIÓN
-# =========================
-st.set_page_config(
-    page_title="Registro de Jóvenes",
-    page_icon="🔥",
-    layout="centered"
-)
-
-# =========================
-# 🎨 ESTILOS
-# =========================
-st.markdown("""
-<style>
-.stApp {
-    background: linear-gradient(135deg, #5E35B1, #7E57C2);
-}
-
-h1 {
-    text-align: center;
-    color: #FFD600;
-    font-weight: 900;
-}
-
-.subtitle {
-    text-align: center;
-    color: #FFFFFF;
-}
-
-.card {
-    background: white;
-    padding: 25px;
-    border-radius: 18px;
-    border-top: 6px solid #FFD600;
-}
-
-.stButton > button {
-    background: linear-gradient(90deg, #FF6D00, #FFD600) !important;
-    color: black !important;
-    border-radius: 12px !important;
-    font-weight: 900 !important;
-}
-
-.stWarning {
-    background: linear-gradient(90deg, #FF6D00, #FFAB00) !important;
-    color: black !important;
-}
-
-</style>
-""", unsafe_allow_html=True)
-
-# =========================
-# 🔥 HEADER
-# =========================
-st.markdown("<h1>🔥 Registro de Jóvenes</h1>", unsafe_allow_html=True)
-st.markdown("<p class='subtitle'>MOVE 🚀</p>", unsafe_allow_html=True)
-
-# =========================
-# 📊 GOOGLE SHEETS
-# =========================
-creds = Credentials.from_service_account_info(
-    st.secrets["gcp_service_account"],
-    scopes=[
-        "https://www.googleapis.com/auth/spreadsheets",
-        "https://www.googleapis.com/auth/drive"
-    ]
-)
-
-client = gspread.authorize(creds)
-
-sheet = client.open_by_url(
-    "https://docs.google.com/spreadsheets/d/1YKaieMah74PhHw8-eSv7-KCnahdBOdc4pTH0AjwPdVA/edit"
-).sheet1
-
-# =========================
-# 📍 DATOS
-# =========================
-barrios_bello = ["Niquía", "Central", "Pérez", "Quitasol", "Madera"]
-
-lideres = [
-    "P. Juan Loaiza",
-    "P. Ruth Gómez",
-    "P. Jhonny Rodriguez",
-    "P. Mary Zuleta",
-    "P. Esteban Rodriguez",
-    "P. Daniela Villa"
-]
-
 # =========================
 # 📝 FORMULARIO
 # =========================
@@ -115,7 +21,7 @@ with st.form("formulario"):
         ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo"]
     )
 
-    horario = st.text_input("Hora")
+    horario = st.text_input("Hora (Ej: 7:30 PM)")
 
     modalidad = st.radio(
         "Modalidad",
@@ -124,11 +30,11 @@ with st.form("formulario"):
 
     if modalidad == "Virtual":
         barrio = "VIRTUAL"
-        st.info("📡 Modalidad virtual")
+        st.info("📡 Modalidad virtual activada")
     else:
-        barrio = st.selectbox("Barrio", barrios_bello)
+        barrio = st.selectbox("Selecciona el barrio en Bello", barrios_bello)
 
-    lider = st.selectbox("Líder", lideres)
+    lider = st.selectbox("Selecciona tu líder de 12", lideres)
 
     grupo = st.radio(
         "Célula",
@@ -136,10 +42,13 @@ with st.form("formulario"):
         horizontal=True
     )
 
-    # 👥 INVITADO
+    # =========================
+    # 👥 INVITADO (CORREGIDO)
+    # =========================
+    st.markdown("---")
     st.markdown("### 👥 Invitado")
 
-    tiene_invitado = st.toggle("¿Traes invitado?")
+    tiene_invitado = st.checkbox("¿Traes invitado?")
 
     if tiene_invitado:
         col4, col5, col6 = st.columns(3)
@@ -157,37 +66,6 @@ with st.form("formulario"):
         celular_inv = ""
         edad_inv = ""
 
-    # 🔥 BOTÓN (ESTABA FALTANDO)
-    enviar = st.form_submit_button("💾 Guardar registro")
+    enviar = st.form_submit_button("💾 Guardar registro", use_container_width=True)
 
 st.markdown('</div>', unsafe_allow_html=True)
-
-# =========================
-# 💾 GUARDAR
-# =========================
-if enviar:
-
-    if nombre.strip() == "" or celular.strip() == "":
-        st.warning("⚠️ Completa los campos obligatorios")
-
-    else:
-        fecha = datetime.now(pytz.timezone('America/Bogota')).strftime("%Y-%m-%d %H:%M")
-
-        sheet.append_row([
-            nombre,
-            celular,
-            edad,
-            dia,
-            horario,
-            modalidad,
-            barrio,
-            lider,
-            grupo,
-            nombre_inv,
-            celular_inv,
-            edad_inv,
-            fecha
-        ])
-
-        st.success("🎉 Registro exitoso")
-        st.balloons()
