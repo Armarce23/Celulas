@@ -105,7 +105,7 @@ div[role="radiogroup"] > label {
 # =========================
 st.markdown("<h1>🔥 Registro de Jóvenes</h1>", unsafe_allow_html=True)
 st.markdown(
-    "<p class='subtitle'>Bienvenido a MOVE 🔥 ¡Estamos creciendo juntos!</p>",
+    "<p class='subtitle'>MOVE 🔥 ¡Estamos creciendo juntos!</p>",
     unsafe_allow_html=True
 )
 
@@ -217,7 +217,21 @@ st.markdown('</div>', unsafe_allow_html=True)
 if enviar:
 
     if nombre.strip() == "" or celular.strip() == "":
-        st.warning("⚠️ Completa los campos obligatorios")
+        st.markdown("""
+<style>
+
+/* ⚠️ WARNING MEJORADO */
+.stWarning {
+    background: linear-gradient(90deg, #FF6D00, #FFAB00) !important;
+    color: #000 !important;
+    font-weight: 800;
+    border-radius: 12px;
+    padding: 12px;
+    border-left: 6px solid #000;
+}
+
+</style>
+""", unsafe_allow_html=True)
 
     else:
         zona_horaria = pytz.timezone('America/Bogota')
