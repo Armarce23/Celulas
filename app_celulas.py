@@ -5,7 +5,7 @@ from google.oauth2.service_account import Credentials
 from datetime import datetime
 
 # =========================
-# 🎨 CONFIG
+# 🎨 CONFIGURACIÓN
 # =========================
 st.set_page_config(
     page_title="Registro de Jóvenes",
@@ -14,7 +14,7 @@ st.set_page_config(
 )
 
 # =========================
-# 🎨 CSS GLOBAL
+# 🎨 ESTILOS (NUEVO DISEÑO)
 # =========================
 st.markdown("""
 <style>
@@ -120,7 +120,24 @@ div[role="radiogroup"] label[data-selected="true"] {
 # 🔥 HEADER
 # =========================
 st.markdown("<h1>🔥 Registro de Jóvenes</h1>", unsafe_allow_html=True)
-st.markdown("<p class='subtitle'>Bienvenido a MOVE 🚀</p>", unsafe_allow_html=True)
+st.markdown(
+    "<p class='subtitle'>Bienvenido a MOVE 🔥 ¡Estamos creciendo juntos!</p>",
+    unsafe_allow_html=True
+)
+
+st.markdown("""
+<div style="text-align:center; margin-bottom:20px;">
+    <span style="
+        background:#FFD600;
+        color:#000;
+        padding:8px 15px;
+        border-radius:20px;
+        font-weight:800;
+    ">
+        🚀 BIENVENIDO A MOVE
+    </span>
+</div>
+""", unsafe_allow_html=True)
 
 # =========================
 # 📊 GOOGLE SHEETS
@@ -146,7 +163,12 @@ sheet = client.open_by_url(
 # =========================
 barrios_bello = [
     "Niquía", "Central", "Pérez", "Quitasol", "Madera", "Santa Ana",
-    "Trapiche", "Cabañas", "Cabañitas", "Serramonte", "Zamora"
+    "Trapiche", "Cabañas", "Cabañitas", "Serramonte", "Zamora",
+    "Buenos Aires", "Espiritu Santo", "Salento", "Paris", "La Cumbre",
+    "Gran Avenida", "Andalucía", "Primavera", "El Carmelo",
+    "La Gabriela", "La Selva", "Ciudad Niquía", "Altos de Niquía",
+    "La Aldea", "Santa Rita", "Los Alpes", "Manchester",
+    "El Rosario", "La Maruchenga", "Playa Rica", "Valadares"
 ]
 
 lideres = [
@@ -157,7 +179,7 @@ lideres = [
 ]
 
 # =========================
-# 📝 FORM
+# 📝 FORMULARIO
 # =========================
 st.markdown('<div class="card">', unsafe_allow_html=True)
 
@@ -186,14 +208,14 @@ with st.form("formulario"):
         ["Presencial", "Virtual", "Ambas"]
     )
 
-    # barrio automático
+    # 🔥 Barrio automático
     if modalidad == "Virtual":
         barrio = "VIRTUAL"
         st.info("📡 Modalidad virtual activada")
     else:
-        barrio = st.selectbox("Barrio en Bello", barrios_bello)
+        barrio = st.selectbox("Selecciona el barrio en Bello", barrios_bello)
 
-    lider = st.selectbox("Líder de 12", lideres)
+    lider = st.selectbox("Selecciona tu líder de 12", lideres)
 
     grupo = st.radio(
         "Célula",
@@ -211,7 +233,7 @@ st.markdown('</div>', unsafe_allow_html=True)
 if enviar:
 
     if nombre.strip() == "" or celular.strip() == "":
-        st.warning("⚡ Completa los campos obligatorios", icon="🚨")
+        st.warning("⚠️ Completa los campos obligatorios")
 
     else:
         zona_horaria = pytz.timezone('America/Bogota')
