@@ -198,14 +198,14 @@ with st.form("formulario"):
 
     dia = st.selectbox(
         "Día de tu célula",
-        ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo"]
+        ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo"," "]
     )
 
     horario = st.text_input("Hora (Ej: 7:30 PM)")
 
     modalidad = st.radio(
         "Modalidad",
-        ["Presencial", "Virtual", "Ambas"]
+        ["Presencial", "Virtual", "No asisto"]
     )
 
     # 🔥 Barrio automático
