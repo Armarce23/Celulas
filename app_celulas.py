@@ -121,7 +121,7 @@ div[role="radiogroup"] label[data-selected="true"] {
 # =========================
 st.markdown("<h1>🔥 Registro de Jóvenes</h1>", unsafe_allow_html=True)
 st.markdown(
-    "<p class='subtitle'>Bienvenido a MOVE 🔥 ¡No paramaos de movernos, estamos creciendo juntos!</p>",
+    "<p class='subtitle'> MOVE 🔥 ¡Nada nos detiene, estamos creciendo juntos!</p>",
     unsafe_allow_html=True
 )
 
