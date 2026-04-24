@@ -100,6 +100,42 @@ div[role="radiogroup"] > label {
 </style>
 """, unsafe_allow_html=True)
 
+st.markdown("""
+<style>
+
+/* 🎯 MODALIDAD - estilo moderno */
+div[role="radiogroup"] {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+    margin-bottom: 15px;
+}
+
+div[role="radiogroup"] label {
+    background: #F5F5F5 !important;
+    padding: 10px 16px !important;
+    border-radius: 20px !important;
+    border: 2px solid transparent !important;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+/* seleccionado */
+div[role="radiogroup"] label[data-selected="true"] {
+    background: #FFD600 !important;
+    color: #000 !important;
+    border: 2px solid #FF6D00 !important;
+    font-weight: 800;
+}
+
+/* hover */
+div[role="radiogroup"] label:hover {
+    transform: scale(1.05);
+}
+
+</style>
+""", unsafe_allow_html=True)
+
 # =========================
 # 🔥 HEADER
 # =========================
@@ -217,6 +253,7 @@ st.markdown('</div>', unsafe_allow_html=True)
 if enviar:
 
     if nombre.strip() == "" or celular.strip() == "":
+    st.warning("⚠️ Completa los campos obligatorios", icon="⚡")
         st.markdown("""
 <style>
 
