@@ -113,7 +113,7 @@ div[role="radiogroup"] label[data-selected="true"] {
 # 🔥 HEADER
 # =========================
 st.markdown("<h1>🔥 Registro de Jóvenes</h1>", unsafe_allow_html=True)
-st.markdown("<p class='subtitle'>MOVE 🔥 ¡Nada nos detiene!</p>", unsafe_allow_html=True)
+st.markdown("<p class='subtitle'>MOVE 🔥 Estamos creciendo juntos ¡Nada nos detiene!</p>", unsafe_allow_html=True)
 
 # =========================
 # 📊 GOOGLE SHEETS
@@ -153,7 +153,7 @@ lideres = [
 # =========================
 # 👥 CONTROL INVITADO (FUERA DEL FORM)
 # =========================
-tiene_invitado = st.checkbox("👥 ¿Traes invitado?")
+tiene_invitado = st.checkbox("👥 ¿Traes un amigo?")
 
 # =========================
 # 📝 FORMULARIO
@@ -202,7 +202,7 @@ with st.form("formulario"):
     # 👇 INVITADO DENTRO DEL FORM PERO CONTROLADO DESDE AFUERA
     if tiene_invitado:
         st.markdown("---")
-        st.markdown("### 👥 Invitado")
+        st.markdown("### 👥 Tú Amigo")
 
         col4, col5, col6 = st.columns(3)
 
