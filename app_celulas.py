@@ -172,10 +172,13 @@ barrios_bello = [
 ]
 
 lideres = [
-    "Juan Loaiza",
-    "Ruth Gómez",
-    "Jhonny Rodriguez",
-    "Mary Zuleta"
+    "P. Juan Loaiza",
+    "P. Ruth Gómez",
+    "P. Jhonny Rodriguez",
+    "P. Mary Zuleta",
+    "P. Esteban Rodriguez",
+    "P. Daniela Villa",
+    " "
 ]
 
 # =========================
@@ -185,7 +188,7 @@ st.markdown('<div class="card">', unsafe_allow_html=True)
 
 with st.form("formulario"):
 
-    col1, col2, col3 = st.columns(3)
+    col1, col2, col3, = st.columns(3)
 
     with col1:
         nombre = st.text_input("Nombre completo *")
@@ -223,9 +226,26 @@ with st.form("formulario"):
         horizontal=True
     )
 
-    enviar = st.form_submit_button("💾 Guardar registro", use_container_width=True)
+    st.markdown("---")
+    st.markdown("### 👥 Invitado")
 
-st.markdown('</div>', unsafe_allow_html=True)
+    tiene_invitado = st.toggle("¿Traes invitado?")
+
+    if tiene_invitado:
+        col10, col11, col12 = st.columns(3)
+
+        with col10:
+            nombre_inv = st.text_input("Nombre invitado")
+
+        with col11:
+            celular_inv = st.text_input("Celular invitado")
+
+        with col12:
+            edad_inv = st.text_input("Edad invitado")
+    else:
+        nombre_inv = ""
+        celular_inv = ""
+        edad_inv = ""
 
 # =========================
 # 💾 GUARDAR
@@ -249,6 +269,9 @@ if enviar:
             barrio,
             lider,
             grupo,
+            nombre_inv,
+            celular_inv,
+            edad_inv,
             fecha
         ])
 
