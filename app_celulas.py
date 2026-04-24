@@ -150,6 +150,12 @@ lideres = [
 ]
 
 # =========================
+# =========================
+# 👥 CONTROL INVITADO (FUERA DEL FORM)
+# =========================
+tiene_invitado = st.checkbox("👥 ¿Traes invitado?")
+
+# =========================
 # 📝 FORMULARIO
 # =========================
 st.markdown('<div class="card">', unsafe_allow_html=True)
@@ -193,13 +199,11 @@ with st.form("formulario"):
         horizontal=True
     )
 
-    # 👥 INVITADO
-    st.markdown("---")
-    st.markdown("### 👥 Invitado (Opcional)")
-
-    tiene_invitado = st.checkbox("¿Traes invitado?")
-
+    # 👇 INVITADO DENTRO DEL FORM PERO CONTROLADO DESDE AFUERA
     if tiene_invitado:
+        st.markdown("---")
+        st.markdown("### 👥 Invitado")
+
         col4, col5, col6 = st.columns(3)
 
         with col4:
@@ -214,6 +218,10 @@ with st.form("formulario"):
         nombre_inv = ""
         celular_inv = ""
         edad_inv = ""
+
+    enviar = st.form_submit_button("💾 Guardar registro", use_container_width=True)
+
+st.markdown('</div>', unsafe_allow_html=True)
 
     enviar = st.form_submit_button("💾 Guardar registro", use_container_width=True)
 
